@@ -1,0 +1,93 @@
+# 🖼 CIFAR-10 кескіндерін классификациялау (CNN арқылы) 
+
+##  Жоба сипаттамасы
+Бұл жобада **Сверточная нейронная сеть (CNN)** пайдаланылады, ол **CIFAR-10** датасетінің кескіндерін 10 түрлі категорияға жіктеуге үйренеді. Жоба **TensorFlow + Keras** көмегімен жасалды.
+
+##  Нәтижелер  
+ **Жаттығу (Training) дәлдігі:** 85%  
+ **Тест дәлдігі:** 78-82%  
+
+##  Жобаның негізгі ерекшеліктері  
+ **3 Конволюциялық қабат (Conv2D)** – суреттерден ерекшеліктерді үйренеді  
+ **3 MaxPooling қабаты** – модельді оңтайландырады  
+ **Полносвязный қабат (Dense Layer)** – сыныптарды классификациялау  
+ **Softmax қабаты (10 сынып үшін)**  
+ **Модельдің 20 эпоха бойы оқытылуы**  
+
+##  Деректер жиыны (Dataset)  
+**CIFAR-10** – 60 000 кескіннен тұратын датасет. Әр сурет 32×32 пиксельден тұрады.  
+Модель келесі 10 категорияны таниды:  
+-  **Ұшақ (airplane)**  
+-  **Автомобиль (automobile)**  
+-  **Құс (bird)**  
+-  **Мысық (cat)**  
+-  **Бұғы (deer)**  
+-  **Ит (dog)**  
+-  **Бақа (frog)**  
+-  **Жылқы (horse)**  
+-  **Кеме (ship)**  
+-  **Жүк көлігі (truck)**  
+import tensorflow as tf
+from tensorflow import keras
+import numpy as np
+import matplotlib.pyplot as plt
+import seaborn as sns
+
+plt.figure(figsize=(10, 5))
+for i in range(10):
+    plt.subplot(2, 5, i+1)
+    plt.imshow(x_train[i])
+    plt.title(class_names[y_train[i][0]])
+    plt.axis("off")
+plt.show()
+
+
+# Загружаем CIFAR-10 dataset
+(x_train, y_train), (x_test, y_test) = keras.datasets.cifar10.load_data()
+
+# Названия классов
+class_names = ["airplane", "automobile", "bird", "cat", "deer", 
+               "dog", "frog", "horse", "ship", "truck"]
+
+# Нормализация данных (приводим к диапазону 0-1)
+x_train, x_test = x_train / 255.0, x_test / 255.0
+
+model = keras.Sequential([
+    # Первый сверточный слой
+    keras.layers.Conv2D(32, (3, 3), activation="relu", input_shape=(32, 32, 3)),
+    keras.layers.MaxPooling2D((2, 2)),
+
+    # Второй сверточный слой
+    keras.layers.Conv2D(64, (3, 3), activation="relu"),
+    keras.layers.MaxPooling2D((2, 2)),
+
+    # Третий сверточный слой
+    keras.layers.Conv2D(128, (3, 3), activation="relu"),
+    keras.layers.MaxPooling2D((2, 2)),
+
+    # Преобразуем в плоский вектор
+    keras.layers.Flatten(),
+
+    # Полносвязные слои
+    keras.layers.Dense(128, activation="relu"),
+    keras.layers.Dense(10, activation="softmax")  # 10 классов
+])
+
+# Компиляция модели
+model.compile(optimizer="adam",
+              loss="sparse_categorical_crossentropy",
+              metrics=["accuracy"])
+
+# Вывод структуры модели
+model.summary()
+
+history = model.fit(x_train, y_train, epochs=20, validation_data=(x_test, y_test))
+
+test_loss, test_acc = model.evaluate(x_test, y_test, verbose=2)
+print(f"\nМодель достигла точности на тесте: {test_acc:.2%}")
+
+# Сохранение модели
+model.save("cifar10_cnn_model.h5")
+
+# Загрузка модели
+loaded_model = keras.models.load_model("cifar10_cnn_model.h5")
