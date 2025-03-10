@@ -1,4 +1,4 @@
-# Классифик classification of CIFAR-10 Images (via CNN) 
+# Classification of CIFAR-10 Images (via CNN) 
 
 ## Project description
 This project uses **Svertochnaya neural network (CNN)**, which learns to classify images of the **CIFAR-10** dataset into 10 different categories. The project was created using** TensorFlow + Keras**.
