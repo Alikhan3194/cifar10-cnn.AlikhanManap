@@ -1,29 +1,29 @@
-# 🖼 CIFAR-10 кескіндерін классификациялау (CNN арқылы) 
+# Классифик classification of CIFAR-10 Images (via CNN) 
 
-##  Жоба сипаттамасы
-Бұл жобада **Сверточная нейронная сеть (CNN)** пайдаланылады, ол **CIFAR-10** датасетінің кескіндерін 10 түрлі категорияға жіктеуге үйренеді. Жоба **TensorFlow + Keras** көмегімен жасалды.
+## Project description
+This project uses **Svertochnaya neural network (CNN)**, which learns to classify images of the **CIFAR-10** dataset into 10 different categories. The project was created using** TensorFlow + Keras**.
 
-##  Нәтижелер  
- **Жаттығу (Training) дәлдігі:** 85%  
- **Тест дәлдігі:** 78-82%  
+## Results  
+ ** Training accuracy: * * 85%  
+ ** Test accuracy: * * 78-82%  
 
-##  Жобаның негізгі ерекшеліктері  
- **3 Конволюциялық қабат (Conv2D)** – суреттерден ерекшеліктерді үйренеді  
- **3 MaxPooling қабаты** – модельді оңтайландырады  
- **Полносвязный қабат (Dense Layer)** – сыныптарды классификациялау  
- **Softmax қабаты (10 сынып үшін)**  
- **Модельдің 20 эпоха бойы оқытылуы**  
+## Main features of the project  
+ ** 3 convolutional layers (Conv2D)* – - learns features from images  
+ ** 3 MaxPooling layers* – - optimizes the model  
+ ** Full layer (Dense Layer)* * – classification of classes  
+ ** Softmax layer (for Class 10)**  
+ ** Training of the model for 20 epochs**  
 
-##  Деректер жиыны (Dataset)  
-**CIFAR-10** – 60 000 кескіннен тұратын датасет. Әр сурет 32×32 пиксельден тұрады.  
-Модель келесі 10 категорияны таниды:  
--  **Ұшақ (airplane)**  
--  **Автомобиль (automobile)**  
--  **Құс (bird)**  
--  **Мысық (cat)**  
--  **Бұғы (deer)**  
--  **Ит (dog)**  
--  **Бақа (frog)**  
--  **Жылқы (horse)**  
--  **Кеме (ship)**  
--  **Жүк көлігі (truck)**  
+## Data set (Dataset)  
+** CIFAR-10** – 60 000 dataset consisting of an image. Each image is 32×32 pixels.  
+The model recognizes the following 10 categories:  
+- **Aircraft (airplane)**  
+- **CAR (automobile)**  
+- **Bird (bird)**  
+- **Cat (cat)**  
+- **Deer (deer)**  
+- **Dog (dog)**  
+- **Frog (frog)**  
+- **Horse (horse)**  
+- **Ship (ship)**  
+- **Truck (truck)**
